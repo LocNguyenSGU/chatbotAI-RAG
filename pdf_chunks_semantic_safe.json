@@ -1,0 +1,128 @@
+[
+  {
+    "content": " \n \nĐHSG.CNTT.KLTN.ĐC \n1 \n    TRƯỜNG ĐẠI HỌC SÀI GÒN \nKHOA CÔNG NGHỆ THÔNG TIN \n \nĐỀ CƯƠNG KHÓA LUẬN TỐT NGHIỆP \n \nI – Phần thông tin chung \nHọ và tên sinh viên 1: NGUYỄN HỮU LỘC \n  \nMSSV \n: 3122410213 \nLớp: DCT1221 \nE-mail \n: lockbkbang@gmail.com \n \n      Ngành \n: Công nghệ thông tin \n \nChuyên ngành : Công nghệ thông tin \nHọ và tên sinh viên 2: VĂN TUẤN KIỆT \n  \nMSSV \n: 3122410202 \nLớp: DCT1223 \nE-mail \n: vankiet27012004@gmail.com \n \n      Ngành \n: Công nghệ thông tin \n \nChuyên ngành : Công nghệ thông tin \n \nTên đề tài: Xây dựng plugin Moodle hỗ trợ gợi ý lộ trình học tập dựa trên hành vi \nngười học \n \nGiảng viên hướng dẫn: TS.",
+    "source": "DeCuong_KLTN_STEM_AI_Kiet_Loc_HK1_2025_2026.pdf",
+    "page": 1,
+    "chunk_id": "1_0"
+  },
+  {
+    "content": "Đỗ Như Tài  \n \nII - Nội dung đề cương  \n1. Tính cấp thiết của đề tài/ Lý do chọn đề tài:  \nTrong bối cảnh giáo dục trực tuyến ngày càng phát triển, các hệ thống quản lý học \ntập (LMS) như Moodle đã trở thành công cụ quan trọng để tổ chức và hỗ trợ quá trình học \ntập. Tuy nhiên, việc cá nhân hóa lộ trình học tập dựa trên hành vi của từng học viên (như \ncách họ tương tác với tài liệu, bài kiểm tra, hoặc thời gian học) vẫn còn hạn chế. Nhiều học \nviên gặp khó khăn trong việc duy trì động lực học tập do thiếu sự hướng dẫn phù hợp với \nnhu cầu cá nhân, dẫn đến hiệu quả học tập chưa tối ưu.",
+    "source": "DeCuong_KLTN_STEM_AI_Kiet_Loc_HK1_2025_2026.pdf",
+    "page": 1,
+    "chunk_id": "1_1"
+  },
+  {
+    "content": "Tuy nhiên, việc cá nhân hóa lộ trình học tập dựa trên hành vi của từng học viên (như \ncách họ tương tác với tài liệu, bài kiểm tra, hoặc thời gian học) vẫn còn hạn chế. Nhiều học \nviên gặp khó khăn trong việc duy trì động lực học tập do thiếu sự hướng dẫn phù hợp với \nnhu cầu cá nhân, dẫn đến hiệu quả học tập chưa tối ưu. Ứng dụng trí tuệ nhân tạo (AI) và học máy (Machine Learning) vào phân tích hành \nvi người học có tiềm năng cải thiện trải nghiệm học tập thông qua việc cung cấp các gợi ý \nlộ trình học tập phù hợp. Đề tài “Xây dựng plugin Moodle hỗ trợ gợi ý lộ trình học tập dựa \ntrên hành vi người học” nhằm phát triển một plugin tích hợp vào Moodle, tận dụng các \nthuật toán học máy để phân tích hành vi và đề xuất nội dung học tập phù hợp.",
+    "source": "DeCuong_KLTN_STEM_AI_Kiet_Loc_HK1_2025_2026.pdf",
+    "page": 1,
+    "chunk_id": "1_2"
+  },
+  {
+    "content": "Nhiều học \nviên gặp khó khăn trong việc duy trì động lực học tập do thiếu sự hướng dẫn phù hợp với \nnhu cầu cá nhân, dẫn đến hiệu quả học tập chưa tối ưu. Ứng dụng trí tuệ nhân tạo (AI) và học máy (Machine Learning) vào phân tích hành \nvi người học có tiềm năng cải thiện trải nghiệm học tập thông qua việc cung cấp các gợi ý \nlộ trình học tập phù hợp. Đề tài “Xây dựng plugin Moodle hỗ trợ gợi ý lộ trình học tập dựa \ntrên hành vi người học” nhằm phát triển một plugin tích hợp vào Moodle, tận dụng các \nthuật toán học máy để phân tích hành vi và đề xuất nội dung học tập phù hợp. Plugin này \nMẪU 1",
+    "source": "DeCuong_KLTN_STEM_AI_Kiet_Loc_HK1_2025_2026.pdf",
+    "page": 1,
+    "chunk_id": "1_3"
+  },
+  {
+    "content": " \n \nĐHSG.CNTT.KLTN.ĐC \n2 \nhướng đến việc hỗ trợ học viên trong việc nâng cao hiệu quả học tập, đặc biệt trong môi \ntrường trực tuyến. 2. Mục đích KLTN: \nMục đích chính của khóa luận là xây dựng một plugin Moodle có khả năng phân \ntích hành vi học tập của người học để gợi ý lộ trình học tập phù hợp, nhằm cải thiện trải \nnghiệm học tập và hỗ trợ quá trình giảng dạy.",
+    "source": "DeCuong_KLTN_STEM_AI_Kiet_Loc_HK1_2025_2026.pdf",
+    "page": 2,
+    "chunk_id": "2_0"
+  },
+  {
+    "content": " \n \nĐHSG.CNTT.KLTN.ĐC \n2 \nhướng đến việc hỗ trợ học viên trong việc nâng cao hiệu quả học tập, đặc biệt trong môi \ntrường trực tuyến. 2. Mục đích KLTN: \nMục đích chính của khóa luận là xây dựng một plugin Moodle có khả năng phân \ntích hành vi học tập của người học để gợi ý lộ trình học tập phù hợp, nhằm cải thiện trải \nnghiệm học tập và hỗ trợ quá trình giảng dạy. Để đạt được mục tiêu đó, đề tài đặt ra các nhiệm vụ cụ thể bao gồm: \n- Nghiên cứu các thuật toán học máy (như K-means, Linear Regression, Q-Learning) \nvà khả năng ứng dụng chúng trong việc phân tích hành vi học tập trên Moodle.",
+    "source": "DeCuong_KLTN_STEM_AI_Kiet_Loc_HK1_2025_2026.pdf",
+    "page": 2,
+    "chunk_id": "2_1"
+  },
+  {
+    "content": "2. Mục đích KLTN: \nMục đích chính của khóa luận là xây dựng một plugin Moodle có khả năng phân \ntích hành vi học tập của người học để gợi ý lộ trình học tập phù hợp, nhằm cải thiện trải \nnghiệm học tập và hỗ trợ quá trình giảng dạy. Để đạt được mục tiêu đó, đề tài đặt ra các nhiệm vụ cụ thể bao gồm: \n- Nghiên cứu các thuật toán học máy (như K-means, Linear Regression, Q-Learning) \nvà khả năng ứng dụng chúng trong việc phân tích hành vi học tập trên Moodle. - Thu thập và tiền xử lý dữ liệu hành vi từ log Moodle để đảm bảo chất lượng dữ liệu \nđầu vào.",
+    "source": "DeCuong_KLTN_STEM_AI_Kiet_Loc_HK1_2025_2026.pdf",
+    "page": 2,
+    "chunk_id": "2_2"
+  },
+  {
+    "content": "Để đạt được mục tiêu đó, đề tài đặt ra các nhiệm vụ cụ thể bao gồm: \n- Nghiên cứu các thuật toán học máy (như K-means, Linear Regression, Q-Learning) \nvà khả năng ứng dụng chúng trong việc phân tích hành vi học tập trên Moodle. - Thu thập và tiền xử lý dữ liệu hành vi từ log Moodle để đảm bảo chất lượng dữ liệu \nđầu vào. - Phát triển Phát triển plugin Moodle tích hợp các mô hình học máy, sử dụng chuẩn \nLTI dể tích hợp. - Đánh giá hiệu quả mô hình thông qua các chỉ số chuyên môn, đồng thời so sánh với \ncác phương pháp đã có để khẳng định tính vượt trội của ứng dụng.",
+    "source": "DeCuong_KLTN_STEM_AI_Kiet_Loc_HK1_2025_2026.pdf",
+    "page": 2,
+    "chunk_id": "2_3"
+  },
+  {
+    "content": "- Thu thập và tiền xử lý dữ liệu hành vi từ log Moodle để đảm bảo chất lượng dữ liệu \nđầu vào. - Phát triển Phát triển plugin Moodle tích hợp các mô hình học máy, sử dụng chuẩn \nLTI dể tích hợp. - Đánh giá hiệu quả mô hình thông qua các chỉ số chuyên môn, đồng thời so sánh với \ncác phương pháp đã có để khẳng định tính vượt trội của ứng dụng. - Đề xuất cải tiến, mở rộng khả năng ứng dụng của plugin \n \n3.",
+    "source": "DeCuong_KLTN_STEM_AI_Kiet_Loc_HK1_2025_2026.pdf",
+    "page": 2,
+    "chunk_id": "2_4"
+  },
+  {
+    "content": "- Phát triển Phát triển plugin Moodle tích hợp các mô hình học máy, sử dụng chuẩn \nLTI dể tích hợp. - Đánh giá hiệu quả mô hình thông qua các chỉ số chuyên môn, đồng thời so sánh với \ncác phương pháp đã có để khẳng định tính vượt trội của ứng dụng. - Đề xuất cải tiến, mở rộng khả năng ứng dụng của plugin \n \n3. Phạm vi nghiên cứu: \nĐề tài tập trung vào việc phát triển một plugin Moodle để gợi ý lộ trình học tập dựa \ntrên hành vi người học, với các khía cạnh sau: \n- Dữ liệu: Sử dụng dữ liệu hành vi từ Moodle (ví dụ: log truy cập, kết quả bài kiểm \ntra, tương tác với tài nguyên) và các tương tác của học viên (như câu hỏi qua chatbot).",
+    "source": "DeCuong_KLTN_STEM_AI_Kiet_Loc_HK1_2025_2026.pdf",
+    "page": 2,
+    "chunk_id": "2_5"
+  },
+  {
+    "content": "- Đề xuất cải tiến, mở rộng khả năng ứng dụng của plugin \n \n3. Phạm vi nghiên cứu: \nĐề tài tập trung vào việc phát triển một plugin Moodle để gợi ý lộ trình học tập dựa \ntrên hành vi người học, với các khía cạnh sau: \n- Dữ liệu: Sử dụng dữ liệu hành vi từ Moodle (ví dụ: log truy cập, kết quả bài kiểm \ntra, tương tác với tài nguyên) và các tương tác của học viên (như câu hỏi qua chatbot). - Thuật toán: Ứng dụng các thuật toán học máy để phân tích hành vi, phân nhóm \nhọc viên, và tối ưu hóa lộ trình học tập. - Ứng dụng: Plugin được thiết kế để triển khai trong các khóa học trực tuyến trên \nMoodle, phù hợp với các cơ sở giáo dục tại Việt Nam.",
+    "source": "DeCuong_KLTN_STEM_AI_Kiet_Loc_HK1_2025_2026.pdf",
+    "page": 2,
+    "chunk_id": "2_6"
+  },
+  {
+    "content": "- Thuật toán: Ứng dụng các thuật toán học máy để phân tích hành vi, phân nhóm \nhọc viên, và tối ưu hóa lộ trình học tập. - Ứng dụng: Plugin được thiết kế để triển khai trong các khóa học trực tuyến trên \nMoodle, phù hợp với các cơ sở giáo dục tại Việt Nam. - Thách thức: Xử lý dữ liệu hành vi không đồng nhất, đảm bảo plugin hoạt động ổn \nđịnh trong môi trường Moodle, và tích hợp với các dịch vụ bên ngoài. 4.",
+    "source": "DeCuong_KLTN_STEM_AI_Kiet_Loc_HK1_2025_2026.pdf",
+    "page": 2,
+    "chunk_id": "2_7"
+  },
+  {
+    "content": "- Ứng dụng: Plugin được thiết kế để triển khai trong các khóa học trực tuyến trên \nMoodle, phù hợp với các cơ sở giáo dục tại Việt Nam. - Thách thức: Xử lý dữ liệu hành vi không đồng nhất, đảm bảo plugin hoạt động ổn \nđịnh trong môi trường Moodle, và tích hợp với các dịch vụ bên ngoài. 4. Phương pháp nghiên cứu: \nĐề tài sử dụng các phương pháp nghiên cứu chính bao gồm:",
+    "source": "DeCuong_KLTN_STEM_AI_Kiet_Loc_HK1_2025_2026.pdf",
+    "page": 2,
+    "chunk_id": "2_8"
+  },
+  {
+    "content": " \n \nĐHSG.CNTT.KLTN.ĐC \n3 \n- Thu thập và tiền xử lý dữ liệu: Bộ dữ liệu bao gồm dữ liệu hành vi từ các bảng \nMoodle như mdl_logstore_standard_log, mdl_quiz_attempts, mdl_course_modules \nvà các tương tác của học viên qua chatbot sẽ được thu thập, sau đó tiến hành chuẩn \nhóa các giá trị như thời gian truy cập và điểm số, loại bỏ nhiễu, mã hóa các biến \nphân loại như loại tài nguyên (PDF, quiz), đồng thời áp dụng các kỹ thuật tăng \ncường dữ liệu như thêm nhiễu hoặc tạo dữ liệu tổng hợp để đảm bảo tính đa dạng \nvà chất lượng của dữ liệu đầu vào.",
+    "source": "DeCuong_KLTN_STEM_AI_Kiet_Loc_HK1_2025_2026.pdf",
+    "page": 3,
+    "chunk_id": "3_0"
+  },
+  {
+    "content": "- Phát triển mô hình: Đề tài triển khai các thuật toán học máy như K-means để phân \nnhóm học viên theo phong cách học hoặc trình độ, Linear Regression để dự đoán \nkết quả học tập, và Q-Learning để tối ưu hóa lộ trình học tập, sử dụng các framework \nnhư Python với Scikit-learn, TensorFlow hoặc PyTorch, cùng với Moodle API để \ntích hợp mô hình vào plugin, nhằm tạo ra các gợi ý lộ trình học tập phù hợp dựa \ntrên hành vi người học. - Huấn luyện và đánh giá: Mô hình sẽ được huấn luyện trên dữ liệu log Moodle từ \ncác khóa học mẫu hoặc dữ liệu tổng hợp, sau đó được đánh giá thông qua việc cho \nngười dùng học thử và thu thập phản hồi từ họ để kiểm tra hiệu quả của hệ thống. - Thử nghiệm và cải tiến: Plugin sẽ được thử nghiệm trên các khóa học Moodle do \nchính đề tài thiết kế để kiểm tra tính ổn định và hiệu quả của các gợi ý, từ đó đề xuất \ncác cải tiến như tối ưu hóa hiệu suất xử lý dữ liệu hoặc mở rộng khả năng phân tích \nhành vi để nâng cao khả năng ứng dụng. 5.",
+    "source": "DeCuong_KLTN_STEM_AI_Kiet_Loc_HK1_2025_2026.pdf",
+    "page": 3,
+    "chunk_id": "3_1"
+  },
+  {
+    "content": "- Huấn luyện và đánh giá: Mô hình sẽ được huấn luyện trên dữ liệu log Moodle từ \ncác khóa học mẫu hoặc dữ liệu tổng hợp, sau đó được đánh giá thông qua việc cho \nngười dùng học thử và thu thập phản hồi từ họ để kiểm tra hiệu quả của hệ thống. - Thử nghiệm và cải tiến: Plugin sẽ được thử nghiệm trên các khóa học Moodle do \nchính đề tài thiết kế để kiểm tra tính ổn định và hiệu quả của các gợi ý, từ đó đề xuất \ncác cải tiến như tối ưu hóa hiệu suất xử lý dữ liệu hoặc mở rộng khả năng phân tích \nhành vi để nâng cao khả năng ứng dụng. 5. Cấu trúc của KLTN: \nChuơng 1: TỔNG QUAN VỀ ĐỀ TÀI \n- Tổng quan về hệ thống quản lý học tập (LMS) và Moodle.",
+    "source": "DeCuong_KLTN_STEM_AI_Kiet_Loc_HK1_2025_2026.pdf",
+    "page": 3,
+    "chunk_id": "3_2"
+  },
+  {
+    "content": "- Thử nghiệm và cải tiến: Plugin sẽ được thử nghiệm trên các khóa học Moodle do \nchính đề tài thiết kế để kiểm tra tính ổn định và hiệu quả của các gợi ý, từ đó đề xuất \ncác cải tiến như tối ưu hóa hiệu suất xử lý dữ liệu hoặc mở rộng khả năng phân tích \nhành vi để nâng cao khả năng ứng dụng. 5. Cấu trúc của KLTN: \nChuơng 1: TỔNG QUAN VỀ ĐỀ TÀI \n- Tổng quan về hệ thống quản lý học tập (LMS) và Moodle. - Vai trò của AI trong cá nhân hoá học tập \n- Giới thiệu các thuật toán học máy và chuẩn tích hợp LTI \n- Tổng quan về các nghiên cứu liên quan \nChuơng 2: PHÂN TÍCH VÀ THIẾT KẾ ĐỀ TÀI \n- Thu thập và tiền xử lý dữ liệu.",
+    "source": "DeCuong_KLTN_STEM_AI_Kiet_Loc_HK1_2025_2026.pdf",
+    "page": 3,
+    "chunk_id": "3_3"
+  },
+  {
+    "content": "5. Cấu trúc của KLTN: \nChuơng 1: TỔNG QUAN VỀ ĐỀ TÀI \n- Tổng quan về hệ thống quản lý học tập (LMS) và Moodle. - Vai trò của AI trong cá nhân hoá học tập \n- Giới thiệu các thuật toán học máy và chuẩn tích hợp LTI \n- Tổng quan về các nghiên cứu liên quan \nChuơng 2: PHÂN TÍCH VÀ THIẾT KẾ ĐỀ TÀI \n- Thu thập và tiền xử lý dữ liệu. - Thiết kế mô hình. - Huấn luyện mô hình. - Đánh giá và tối ưu hóa.",
+    "source": "DeCuong_KLTN_STEM_AI_Kiet_Loc_HK1_2025_2026.pdf",
+    "page": 3,
+    "chunk_id": "3_4"
+  },
+  {
+    "content": " \n \nĐHSG.CNTT.KLTN.ĐC \n4 \nChuơng 3: XÂY DỰNG ỨNG DỤNG \n- Thiết kế giao diện ứng dụng. - Xây dựng ứng dụng. - Tích hợp mô hình vào ứng dụng. Chuơng 4: KẾT QUẢ THỰC NGHIỆM \n- Kết quả phân tích hành vi và lộ trình học tập \n- Phân tích kết quả. - Ứng dụng thực tiễn và hạn chế \n- Đề xuất cải tiến và phát triển \n6.",
+    "source": "DeCuong_KLTN_STEM_AI_Kiet_Loc_HK1_2025_2026.pdf",
+    "page": 4,
+    "chunk_id": "4_0"
+  },
+  {
+    "content": "- Tích hợp mô hình vào ứng dụng. Chuơng 4: KẾT QUẢ THỰC NGHIỆM \n- Kết quả phân tích hành vi và lộ trình học tập \n- Phân tích kết quả. - Ứng dụng thực tiễn và hạn chế \n- Đề xuất cải tiến và phát triển \n6. Kế hoạch thực hiện đồ án/ khóa luận tốt nghiệp trong 15 tuần: \nTuần \nCông việc dự kiến \nGhi chú \n1 – 2 \nTìm hiểu và nghiên cứu về Moodle, LTI và các thuật toán \nhọc máy \n  \n3 – 4 \nThu thập dữ liệu log từ moodle và chạy thử các demo \n  \n5 \nTiền xử lý dữ liệu \n  \n6 – 7 \nHuấn luyện mô hình \n  \n8 – 9 \nThiết kế phát triển plugin \n  \n  9 – 10 – 11 \n Tích hợp plugin vào Moodle, thử nghiệm trên khoá học \nmẫu \n  \n11 – 12 \nĐánh giá kết quả \n  \n13  \nKết luận và khuyến nghị \n  \n14 – 15 \nHoàn thành báo cáo",
+    "source": "DeCuong_KLTN_STEM_AI_Kiet_Loc_HK1_2025_2026.pdf",
+    "page": 4,
+    "chunk_id": "4_1"
+  },
+  {
+    "content": " \n \nĐHSG.CNTT.KLTN.ĐC \n5 \n                                    TP. HCM, ngày 14 tháng 07 năm 2025 \n    Ý kiến giảng viên hướng dẫn                                      Sinh viên thực hiện \n            (Ký và ghi rõ họ tên)                                             (Ký và ghi rõ họ tên) \n \n \n \n \n \n \n \nÝ kiến của trưởng Bộ môn \n(Ký và ghi rõ họ tên)",
+    "source": "DeCuong_KLTN_STEM_AI_Kiet_Loc_HK1_2025_2026.pdf",
+    "page": 5,
+    "chunk_id": "5_0"
+  }
+]
