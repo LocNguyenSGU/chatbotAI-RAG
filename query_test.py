@@ -3,6 +3,7 @@ import faiss
 import json
 import requests
 import logging
+import numpy as np
 from flask import Flask, request, jsonify
 from sentence_transformers import SentenceTransformer
 import google.generativeai as palm
@@ -15,19 +16,24 @@ API_KEY = "AIzaSyAp0SgYHRHiIcdXXDvqnAupzXfXiLBpLwg"
 palm.configure(api_key=API_KEY)
 
 EMBED_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
-TOP_K = 3
+TOP_K = 4
+SCORE_THRESHOLD = 0.3      # ngưỡng cosine similarity
+KEYWORD_BOOST = 0.2        # tăng điểm nếu chunk chứa từ khóa query
 
 logging.info("🚀 Load embedding model...")
 embed_model = SentenceTransformer(EMBED_MODEL_NAME)
 
 logging.info("📂 Load FAISS index...")
-index = faiss.read_index("pdf_safe.index")
+index = faiss.read_index("pdf.index")
+
+# Chuẩn hóa FAISS nếu dùng cosine
+faiss.normalize_L2(index.reconstruct_n(0, index.ntotal))
 
 try:
-    with open("pdf_chunks_semantic_safe.json", "r", encoding="utf-8") as f:
+    with open("pdf_chunks_semantic.json", "r", encoding="utf-8") as f:
         raw_metadata = json.load(f)
 except FileNotFoundError:
-    logging.error("Không tìm thấy file 'metadata.json'.")
+    logging.error("Không tìm thấy file 'pdf_chunks_semantic.json'.")
     exit()
 
 # ------------------ Clean metadata ------------------
@@ -41,21 +47,36 @@ def clean_text(text):
 metadata = [{**m, "content": clean_text(m["content"])} for m in raw_metadata]
 
 # ------------------ Search FAISS ------------------
-def search(query, top_k=TOP_K, score_threshold=0.75):
-    query_emb = embed_model.encode([query], convert_to_numpy=True)
-    distances, indices = index.search(query_emb, top_k)
+def search(query, top_k=TOP_K, score_threshold=SCORE_THRESHOLD):
+    query_emb = embed_model.encode([query], convert_to_numpy=True, normalize_embeddings=True)
+    distances, indices = index.search(query_emb, top_k * 5)  # lấy rộng hơn để rerank
     results = []
     seen = set()
-    for idx, dist in zip(indices[0], distances[0]):
-        if dist < score_threshold:
+
+    for idx, sim in zip(indices[0], distances[0]):
+        if idx < 0:
             continue
-        snippet = metadata[idx]["content"][:300]
-        if snippet in seen:
+        if sim < score_threshold:
             continue
-        seen.add(snippet)
+
+        chunk = metadata[idx]["content"]
+        score = float(sim)
+
+        # keyword boost
+        if query.lower() in chunk.lower():
+            score += KEYWORD_BOOST
+
+        if chunk in seen:
+            continue
+        seen.add(chunk)
+
         r = metadata[idx].copy()
-        r["score"] = float(dist)
+        r["score"] = score
         results.append(r)
+
+    # sắp xếp lại theo score giảm dần và lấy top_k
+    results = sorted(results, key=lambda x: x["score"], reverse=True)[:top_k]
+
     # Log top_k selected
     logging.info(f"Top {top_k} chunks selected for query '{query}':")
     for r in results:

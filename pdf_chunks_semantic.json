@@ -1,0 +1,32 @@
+[
+  {
+    "content": "ĐHSG.CNTT.KLTN.ĐC 1 TRƯỜNG ĐẠI HỌC SÀI GÒN KHOA CÔNG NGHỆ THÔNG TIN ĐỀ CƯƠNG KHÓA LUẬN TỐT NGHIỆP I – Phần thông tin chung Họ và tên sinh viên 1: NGUYỄN HỮU LỘC MSSV : 3122410213 Lớp: DCT1221 E-mail : lockbkbang@gmail.com Ngành : Công nghệ thông tin Chuyên ngành : Công nghệ thông tin Họ và tên sinh viên 2: VĂN TUẤN KIỆT MSSV : 3122410202 Lớp: DCT1223 E-mail : vankiet27012004@gmail.com Ngành : Công nghệ thông tin Chuyên ngành : Công nghệ thông tin Tên đề tài: Xây dựng plugin Moodle hỗ trợ gợi ý lộ trình học tập dựa trên hành vi người học Giảng viên hướng dẫn: TS. Đỗ Như Tài II - Nội dung đề cương 1. Tính cấp thiết của đề tài/ Lý do chọn đề tài: Trong bối cảnh giáo dục trực tuyến ngày càng phát triển, các hệ thống quản lý học tập (LMS) như Moodle đã trở thành công cụ quan trọng để tổ chức và hỗ trợ quá trình học tập. Tuy nhiên, việc cá nhân hóa lộ trình học tập dựa trên hành vi của từng học viên (như cách họ tương tác với tài liệu, bài kiểm tra, hoặc thời gian học) vẫn còn hạn chế. Nhiều học viên gặp khó khăn trong việc duy trì động lực học tập do thiếu sự hướng dẫn phù hợp với nhu cầu cá nhân, dẫn đến hiệu quả học tập chưa tối ưu. Ứng dụng trí tuệ nhân tạo (AI) và học máy (Machine Learning) vào phân tích hành vi người học có tiềm năng cải thiện trải nghiệm học tập thông qua việc cung cấp các gợi ý lộ trình học tập phù hợp.",
+    "source": "DeCuong_KLTN_STEM_AI_Kiet_Loc_HK1_2025_2026.pdf",
+    "page": 1,
+    "chunk_id": "1_0"
+  },
+  {
+    "content": "ĐHSG.CNTT.KLTN.ĐC 2 hướng đến việc hỗ trợ học viên trong việc nâng cao hiệu quả học tập, đặc biệt trong môi trường trực tuyến. 2. Mục đích KLTN: Mục đích chính của khóa luận là xây dựng một plugin Moodle có khả năng phân tích hành vi học tập của người học để gợi ý lộ trình học tập phù hợp, nhằm cải thiện trải nghiệm học tập và hỗ trợ quá trình giảng dạy. Để đạt được mục tiêu đó, đề tài đặt ra các nhiệm vụ cụ thể bao gồm: - Nghiên cứu các thuật toán học máy (như K-means, Linear Regression, Q-Learning) và khả năng ứng dụng chúng trong việc phân tích hành vi học tập trên Moodle. - Thu thập và tiền xử lý dữ liệu hành vi từ log Moodle để đảm bảo chất lượng dữ liệu đầu vào. - Phát triển Phát triển plugin Moodle tích hợp các mô hình học máy, sử dụng chuẩn LTI dể tích hợp. - Đánh giá hiệu quả mô hình thông qua các chỉ số chuyên môn, đồng thời so sánh với các phương pháp đã có để khẳng định tính vượt trội của ứng dụng. - Đề xuất cải tiến, mở rộng khả năng ứng dụng của plugin 3. Phạm vi nghiên cứu: Đề tài tập trung vào việc phát triển một plugin Moodle để gợi ý lộ trình học tập dựa trên hành vi người học, với các khía cạnh sau: - Dữ liệu: Sử dụng dữ liệu hành vi từ Moodle (ví dụ: log truy cập, kết quả bài kiểm tra, tương tác với tài nguyên) và các tương tác của học viên (như câu hỏi qua chatbot).",
+    "source": "DeCuong_KLTN_STEM_AI_Kiet_Loc_HK1_2025_2026.pdf",
+    "page": 2,
+    "chunk_id": "2_0"
+  },
+  {
+    "content": "ĐHSG.CNTT.KLTN.ĐC 3 - Thu thập và tiền xử lý dữ liệu: Bộ dữ liệu bao gồm dữ liệu hành vi từ các bảng Moodle như mdl_logstore_standard_log, mdl_quiz_attempts, mdl_course_modules và các tương tác của học viên qua chatbot sẽ được thu thập, sau đó tiến hành chuẩn hóa các giá trị như thời gian truy cập và điểm số, loại bỏ nhiễu, mã hóa các biến phân loại như loại tài nguyên (PDF, quiz), đồng thời áp dụng các kỹ thuật tăng cường dữ liệu như thêm nhiễu hoặc tạo dữ liệu tổng hợp để đảm bảo tính đa dạng và chất lượng của dữ liệu đầu vào. - Phát triển mô hình: Đề tài triển khai các thuật toán học máy như K-means để phân nhóm học viên theo phong cách học hoặc trình độ, Linear Regression để dự đoán kết quả học tập, và Q-Learning để tối ưu hóa lộ trình học tập, sử dụng các framework như Python với Scikit-learn, TensorFlow hoặc PyTorch, cùng với Moodle API để tích hợp mô hình vào plugin, nhằm tạo ra các gợi ý lộ trình học tập phù hợp dựa trên hành vi người học. - Huấn luyện và đánh giá: Mô hình sẽ được huấn luyện trên dữ liệu log Moodle từ các khóa học mẫu hoặc dữ liệu tổng hợp, sau đó được đánh giá thông qua việc cho người dùng học thử và thu thập phản hồi từ họ để kiểm tra hiệu quả của hệ thống.",
+    "source": "DeCuong_KLTN_STEM_AI_Kiet_Loc_HK1_2025_2026.pdf",
+    "page": 3,
+    "chunk_id": "3_0"
+  },
+  {
+    "content": "ĐHSG.CNTT.KLTN.ĐC 4 Chuơng 3: XÂY DỰNG ỨNG DỤNG - Thiết kế giao diện ứng dụng. - Xây dựng ứng dụng. - Tích hợp mô hình vào ứng dụng. Chuơng 4: KẾT QUẢ THỰC NGHIỆM - Kết quả phân tích hành vi và lộ trình học tập - Phân tích kết quả. - Ứng dụng thực tiễn và hạn chế - Đề xuất cải tiến và phát triển 6. Kế hoạch thực hiện đồ án/ khóa luận tốt nghiệp trong 15 tuần: Tuần Công việc dự kiến Ghi chú 1 – 2 Tìm hiểu và nghiên cứu về Moodle, LTI và các thuật toán học máy 3 – 4 Thu thập dữ liệu log từ moodle và chạy thử các demo 5 Tiền xử lý dữ liệu 6 – 7 Huấn luyện mô hình 8 – 9 Thiết kế phát triển plugin 9 – 10 – 11 Tích hợp plugin vào Moodle, thử nghiệm trên khoá học mẫu 11 – 12 Đánh giá kết quả 13 Kết luận và khuyến nghị 14 – 15 Hoàn thành báo cáo",
+    "source": "DeCuong_KLTN_STEM_AI_Kiet_Loc_HK1_2025_2026.pdf",
+    "page": 4,
+    "chunk_id": "4_0"
+  },
+  {
+    "content": "ĐHSG.CNTT.KLTN.ĐC 5 TP. HCM, ngày 14 tháng 07 năm 2025 Ý kiến giảng viên hướng dẫn Sinh viên thực hiện (Ký và ghi rõ họ tên) (Ký và ghi rõ họ tên) Ý kiến của trưởng Bộ môn (Ký và ghi rõ họ tên)",
+    "source": "DeCuong_KLTN_STEM_AI_Kiet_Loc_HK1_2025_2026.pdf",
+    "page": 5,
+    "chunk_id": "5_0"
+  }
+]
