@@ -1,31 +1,40 @@
 # ChatbotAI-RAG
 
-**ChatbotAI-RAG** là dự án chatbot thông minh sử dụng **Retrieval-Augmented Generation (RAG)**, giúp trả lời câu hỏi dựa trên tài liệu PDF và cơ sở dữ liệu SQL.
+Chatbot thông minh sử dụng **Retrieval-Augmented Generation (RAG)** để trả lời câu hỏi từ PDF và cơ sở dữ liệu SQL.
 
 ---
 
-## 🔹 Tính năng chính
+## 🚀 Tính năng
 
-- Tạo **embedding** cho từng đoạn văn bản trong PDF bằng **SentenceTransformer**.
-- Lưu trữ embedding trong **FAISS** để tìm kiếm thông tin liên quan nhanh chóng.
-- Tích hợp **Google Gemini API** hoặc **OpenAI API** để tạo câu trả lời tự nhiên, chính xác và ngắn gọn dựa trên ngữ cảnh.
-- Xử lý PDF thành các chunk semantic, loại bỏ nội dung trùng lặp, đảm bảo hiệu quả truy xuất.
-- Tích hợp **LangChain SQLDatabaseChain**: trả lời câu hỏi liên quan cơ sở dữ liệu MySQL mà không cần viết SQL thủ công.
-- Cung cấp **Flask API** với endpoint `/ask` để nhận truy vấn từ người dùng và trả về câu trả lời kèm ngữ cảnh liên quan.
+- Tạo embedding từ PDF bằng **SentenceTransformer**, lưu trong **FAISS**.  
+- Trả lời tự nhiên với **Google Gemini/OpenAI API**.  
+- Chia chunk semantic, loại bỏ trùng lặp.  
+- Tích hợp **LangChain SQLDatabaseChain** cho truy vấn MySQL.  
+- **Flask API** với endpoint `/ask` và `/similar`.
 
 ---
 
-## 🔹 Cài đặt
+## 🛠 Cài đặt
 
 ```bash
 # Clone dự án
 git clone <repository_url>
 cd ChatbotAI-RAG
 
-# Tạo môi trường ảo (Python 3.12+)
+# Tạo môi trường ảo
 python -m venv venv
 source venv/bin/activate  # macOS/Linux
 venv\Scripts\activate     # Windows
 
 # Cài đặt dependencies
 pip install -r requirements.txt
+```
+## 📂 Cấu trúc mã
+
+- **loader.py**: Đọc PDF/DOCX/DB, trả văn bản hoặc danh sách chunk.  
+- **chunker.py**: Chia văn bản thành chunk, loại bỏ trùng lặp, trả về embedding.  
+- **embedder.py**: Mã hóa văn bản bằng SentenceTransformer, chuẩn hóa embedding.  
+- **indexer.py**: Xây dựng hoặc thêm chỉ mục FAISS cho các chunk.  
+- **search.py**: Tìm kiếm top-k chunk bằng FAISS + fuzzy matching.  
+- **api.py**: Flask API, cung cấp endpoint `/ask` và `/similar`.  
+- **main.py**: Pipeline offline: đọc PDF → chia chunk → tạo FAISS index → lưu JSON.  
