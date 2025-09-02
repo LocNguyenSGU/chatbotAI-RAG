@@ -1,159 +1,211 @@
+import os
 import re
-import faiss
 import json
-import requests
+import faiss
 import logging
+import requests
 import numpy as np
 from flask import Flask, request, jsonify
 from sentence_transformers import SentenceTransformer
-import google.generativeai as palm
+from difflib import SequenceMatcher
 
 # ------------------ Logging ------------------
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
 # ------------------ Cấu hình ------------------
 API_KEY = "AIzaSyAp0SgYHRHiIcdXXDvqnAupzXfXiLBpLwg"
-palm.configure(api_key=API_KEY)
+EMBED_MODEL_NAME = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
 
-EMBED_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
-TOP_K = 4
-SCORE_THRESHOLD = 0.3      # ngưỡng cosine similarity
-KEYWORD_BOOST = 0.2        # tăng điểm nếu chunk chứa từ khóa query
+TOP_K = 15
+SCORE_THRESHOLD = 0.5
+KEYWORD_BOOST = 0.5
+EXACT_MATCH_BOOST = 2.0
+MAX_PROMPT_WORDS = 5000
 
-logging.info("🚀 Load embedding model...")
+COURSE_FOLDER = "Course/SGK_CS_12"
+CHUNKS_JSON_FOLDER = os.path.join(COURSE_FOLDER, "chunks_json")
+FAISS_INDEX_FOLDER = os.path.join(COURSE_FOLDER, "faiss_index")
+FAISS_INDEX_PATH = os.path.join(FAISS_INDEX_FOLDER, "all_lessons.index")
+CHUNKS_JSON_PATH = os.path.join(CHUNKS_JSON_FOLDER, "all_chunks.json")
+
+# ------------------ Load embedding ------------------
+logging.info("🚀 Loading embedding model...")
 embed_model = SentenceTransformer(EMBED_MODEL_NAME)
 
-logging.info("📂 Load FAISS index...")
-index = faiss.read_index("pdf.index")
+# ------------------ Load JSON + FAISS index chung ------------------
+logging.info("📂 Loading chunks JSON and FAISS index...")
 
-# Chuẩn hóa FAISS nếu dùng cosine
-faiss.normalize_L2(index.reconstruct_n(0, index.ntotal))
+with open(CHUNKS_JSON_PATH, "r", encoding="utf-8") as f:
+    all_metadata = json.load(f)
+logging.info(f"✅ Loaded JSON chunks: {len(all_metadata)} chunks")
 
-try:
-    with open("pdf_chunks_semantic.json", "r", encoding="utf-8") as f:
-        raw_metadata = json.load(f)
-except FileNotFoundError:
-    logging.error("Không tìm thấy file 'pdf_chunks_semantic.json'.")
-    exit()
-
-# ------------------ Clean metadata ------------------
-def clean_text(text):
+# Clean text
+def clean_text(text: str) -> str:
     text = re.sub(r'\(Ký và ghi rõ họ tên\)', '', text)
-    text = re.sub(r'\b\d+\b', '', text)
-    text = re.sub(r'[^\w\s.,;:\-–]', '', text)
-    text = re.sub(r'\s+', ' ', text).strip()
-    return text
+    return re.sub(r'\s+', ' ', text).strip()
 
-metadata = [{**m, "content": clean_text(m["content"])} for m in raw_metadata]
+metadata = [{**m, "content": clean_text(m["content"])} for m in all_metadata]
 
-# ------------------ Search FAISS ------------------
-def search(query, top_k=TOP_K, score_threshold=SCORE_THRESHOLD):
+# Load FAISS index
+faiss_index = faiss.read_index(FAISS_INDEX_PATH)
+logging.info(f"✅ Loaded FAISS index: {FAISS_INDEX_PATH}, total vectors: {faiss_index.ntotal}")
+
+# ------------------ Fuzzy match ------------------
+def fuzzy_score(query: str, text: str) -> float:
+    return SequenceMatcher(None, query.lower(), text.lower()).ratio()
+
+# ------------------ Search FAISS + Fuzzy ------------------
+def search(query: str, top_k: int = TOP_K, score_threshold: float = SCORE_THRESHOLD):
     query_emb = embed_model.encode([query], convert_to_numpy=True, normalize_embeddings=True)
-    distances, indices = index.search(query_emb, top_k * 5)  # lấy rộng hơn để rerank
-    results = []
+    all_results = []
     seen = set()
 
-    for idx, sim in zip(indices[0], distances[0]):
-        if idx < 0:
+    keywords = [kw.strip().lower() for kw in re.split(r'\W+', query) if kw.strip()]
+    query_lower = query.lower()
+
+    distances, indices = faiss_index.search(query_emb, top_k * 5)
+
+    for i, sim in zip(indices[0], distances[0]):
+        if i < 0:
             continue
-        if sim < score_threshold:
+
+        chunk_metadata = metadata[i]
+        chunk = chunk_metadata["content"]
+        key = (chunk_metadata['source'], chunk_metadata['page'], chunk_metadata['chunk_id'])
+        if key in seen:
             continue
+        seen.add(key)
 
-        chunk = metadata[idx]["content"]
-        score = float(sim)
+        # 1. Semantic score
+        semantic_score = float(sim)
 
-        # keyword boost
-        if query.lower() in chunk.lower():
-            score += KEYWORD_BOOST
+        # 2. Exact match boost
+        exact_match_score = EXACT_MATCH_BOOST if query_lower in chunk.lower() else 0
 
-        if chunk in seen:
-            continue
-        seen.add(chunk)
+        # 3. Keyword boost
+        keyword_score = sum(KEYWORD_BOOST for kw in set(keywords) if kw in chunk.lower())
 
-        r = metadata[idx].copy()
-        r["score"] = score
-        results.append(r)
+        # 4. Fuzzy score
+        fuzzy_val = fuzzy_score(query_lower, chunk.lower())
 
-    # sắp xếp lại theo score giảm dần và lấy top_k
-    results = sorted(results, key=lambda x: x["score"], reverse=True)[:top_k]
+        final_score = semantic_score + exact_match_score + keyword_score + fuzzy_val
 
-    # Log top_k selected
-    logging.info(f"Top {top_k} chunks selected for query '{query}':")
-    for r in results:
-        logging.info(f"Page {r['page']} | Score {r['score']:.4f} | Chunk ID {r['chunk_id']}")
-    return results
+        if final_score >= score_threshold:
+            r = chunk_metadata.copy()
+            r["score"] = final_score
+            all_results.append(r)
+
+    final_results = sorted(all_results, key=lambda x: x["score"], reverse=True)[:top_k]
+
+    logging.info(f"Top {top_k} chunks for query: '{query}'")
+    for r in final_results:
+        logging.info(f"Page {r['page']} | Score {r['score']:.4f} | Snippet: {r['content'][:80]}...")
+
+    return final_results
 
 # ------------------ Gọi Gemini ------------------
-def ask_gemini(prompt):
+def ask_gemini(prompt: str) -> str:
     url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent"
-    headers = {
-        "Content-Type": "application/json",
-        "X-goog-api-key": API_KEY
-    }
-    data = {
-        "contents": [{"parts": [{"text": prompt}]}]
-    }
+    headers = {"Content-Type": "application/json", "X-goog-api-key": API_KEY}
+    data = {"contents": [{"parts": [{"text": prompt}]}]}
 
+    logging.info(f"📤 Sending prompt to Gemini ({len(prompt.split())} words)...")
     try:
         response = requests.post(url, headers=headers, json=data)
         response.raise_for_status()
         result = response.json()
-        text = result["candidates"][0]["content"]["parts"][0]["text"]
-        return text
-    except (KeyError, IndexError):
-        logging.warning("Không có kết quả từ Gemini.")
-        return "Không có kết quả từ Gemini."
-    except requests.exceptions.RequestException as e:
-        logging.exception(f"Lỗi khi gọi API Gemini: {e}")
-        return f"Lỗi khi gọi API Gemini: {e}"
+        return result["candidates"][0]["content"]["parts"][0]["text"]
+    except Exception as e:
+        logging.exception("Error calling Gemini API")
+        return f"Lỗi: {e}"
 
 # ------------------ RAG + Gemini ------------------
-def rag_answer(query, top_k=TOP_K, max_words=1500):
-    results = search(query, top_k=top_k)
-    context_full = "\n".join([r["content"] for r in results])
-    combined_text = f"""
-Bạn là trợ lý AI. Trả lời ngắn gọn, chỉ dựa vào nội dung tài liệu dưới đây. 
-Không thêm thông tin ngoài tài liệu.
-
-Tài liệu:
-{context_full}
-
-Câu hỏi:
-{query}
-
-Trả lời:
-"""
-    words = combined_text.split()
-    prompt_limited = " ".join(words[:max_words])
+def rag_answer(query: str, top_k: int = TOP_K, max_words: int = MAX_PROMPT_WORDS):
+    chunks = search(query, top_k=top_k)
+    context = "\n".join([c["content"] for c in chunks])
+    prompt = f"""
+        Bạn là trợ lý AI. Trả lời đầy đủ, chỉ dựa vào nội dung tài liệu dưới đây.
+        Không thêm thông tin ngoài tài liệu, văn phong như gia sư hỗ trợ học tập.
+        
+        Tài liệu:
+        {context}
+        
+        Câu hỏi:
+        {query}
+        
+        Trả lời:
+        """
+    prompt_limited = " ".join(prompt.split()[:max_words])
     answer = ask_gemini(prompt_limited)
-    return answer, results
+    return answer, chunks
 
 # ------------------ Flask API ------------------
 app = Flask(__name__)
 
 @app.route("/ask", methods=["POST"])
 def ask():
-    try:
-        data = request.json
-        query = data.get("query", "").strip()
-        if not query:
-            return jsonify({"error": "Missing 'query' in request"}), 400
+    data = request.json
+    query = data.get("query", "").strip()
+    if not query:
+        return jsonify({"error": "Missing 'query'"}), 400
 
-        answer, results = rag_answer(query)
+    answer, chunks = rag_answer(query)
+    context_used = [{"page": c["page"], "score": c["score"], "snippet": c["content"][:500]} for c in chunks]
 
-        context_used = [
-            {"page": r["page"], "score": r["score"], "snippet": r["content"][:500]} for r in results
-        ]
+    return jsonify({
+        "query": query,
+        "answer": answer,
+        "context_used": context_used
+    })
 
-        return jsonify({
-            "query": query,
-            "answer": answer,
-            "context_used": context_used
+# ------------------ Endpoint tìm chunks tương tự ------------------
+@app.route("/similar", methods=["POST"])
+def similar():
+    data = request.json
+    content = data.get("content", "").strip()
+    top_k = int(data.get("top_k", 5))  # default 5
+
+    if not content:
+        return jsonify({"error": "Missing 'content'"}), 400
+
+    # Embedding cho chunk / câu hỏi mẫu
+    query_emb = embed_model.encode([content], convert_to_numpy=True, normalize_embeddings=True)
+
+    # Search FAISS index
+    distances, indices = faiss_index.search(query_emb, top_k * 5)
+
+    results = []
+    seen = set()
+    for i, dist in zip(indices[0], distances[0]):
+        if i < 0:
+            continue
+        chunk_metadata = metadata[i]
+        key = (chunk_metadata['source'], chunk_metadata['page'], chunk_metadata['chunk_id'])
+        if key in seen:
+            continue
+        seen.add(key)
+
+        # Fuzzy score + semantic score
+        fuzzy_val = SequenceMatcher(None, content.lower(), chunk_metadata['content'].lower()).ratio()
+        semantic_score = float(dist)
+        final_score = semantic_score + fuzzy_val  # có thể cân nhắc thêm keyword boost nếu muốn
+
+        results.append({
+            "source": chunk_metadata['source'],
+            "page": chunk_metadata['page'],
+            "chunk_id": chunk_metadata['chunk_id'],
+            "content": chunk_metadata['content'],
+            "score": final_score
         })
 
-    except Exception as e:
-        logging.exception("Error in /ask endpoint")
-        return jsonify({"error": str(e)}), 500
+    # Sort theo score giảm dần và lấy top_k
+    results = sorted(results, key=lambda x: x["score"], reverse=True)[:top_k]
+
+    return jsonify({
+        "query_content": content,
+        "top_k": top_k,
+        "results": results
+    })
 
 if __name__ == "__main__":
     logging.info("🚀 Starting Flask server on port 5001")
